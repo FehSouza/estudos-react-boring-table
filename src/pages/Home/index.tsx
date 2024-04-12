@@ -2,6 +2,7 @@ import { FilterPlugin, PaginationPlugin, createOptions, useTable, RowSelectPlugi
 import * as S from './styles'
 import { faker } from '@faker-js/faker'
 import { useState } from 'react'
+import { MdClose } from 'react-icons/md'
 
 interface Data {
   id: number
@@ -11,7 +12,7 @@ interface Data {
 
 const data: Data[] = []
 
-for (let index = 0; index < 100; index++) {
+for (let i = 0; i < 100; i++) {
   data.push({ id: data.length, name: faker.person.firstName(), age: faker.number.int({ min: 1, max: 100 }) })
 }
 
@@ -35,7 +36,7 @@ const tableOptions = createOptions({
       ),
       body: (_item, extra) => (
         <td key={extra.id}>
-          <input type="checkbox" checked={extra.getRow()?.selected} onChange={() => extra.getRow()?.toggleSelect?.()} />
+          <input type="checkbox" checked={extra.getRow()?.selected} onChange={() => extra.getRow().toggleSelect?.()} />
         </td>
       ),
     },
@@ -44,27 +45,35 @@ const tableOptions = createOptions({
       body: (item, extra) => <td key={extra.id}>{item.id}</td>,
     },
     {
-      head: (extra) => <th key={extra.id}>NOME</th>,
+      head: (extra) => <th key={extra.id}>Nome</th>,
       body: (item, extra) => <td key={extra.id}>{item.name}</td>,
     },
     {
-      head: (extra) => <th key={extra.id}>IDADE</th>,
+      head: (extra) => <th key={extra.id}>Idade</th>,
       body: (item, extra) => <td key={extra.id}>{item.age}</td>,
     },
   ],
   plugins: [
-    new FilterPlugin<Data[], { name: string; age: number }>({
-      initialValue: { name: '', age: 0 },
+    new FilterPlugin<Data[], { name: string; age: number | string }>({
+      initialValue: { name: '', age: '' },
       filter: (item, criteria) => {
-        if (criteria.name === '' && criteria.age === 0) return true
-        if (item.name.toLowerCase().includes(criteria.name.toLowerCase())) return true
-        if (criteria.age === item.age) return true
+        const emptyName = criteria.name === ''
+        const emptyAge = criteria.age === '' || Number.isNaN(criteria.age)
+        const validName = item.name.toLowerCase().includes(criteria.name.toLowerCase())
+        const validAge = String(item.age).includes(String(criteria.age))
+
+        if (emptyName && emptyAge) return true
+        if (validName && emptyAge) return true
+        if (emptyName && validAge) return true
+        if (validName && validAge) return true
         return false
       },
     }),
+
     new PaginationPlugin({
       pageSize: 20,
     }),
+
     new RowSelectPlugin(),
   ],
 })
@@ -72,21 +81,31 @@ const tableOptions = createOptions({
 export const Home = () => {
   const [options] = useState(() => tableOptions)
   const table = useTable(options)
+  const criteriaName = table.extensions.criteria.name
+  const criteriaAge = table.extensions.criteria.age
 
   return (
     <S.Container>
-      <input
-        placeholder="Digite um nome"
-        value={table.extensions.criteria.name}
-        onChange={(e) => table.extensions.filter((prev) => ({ ...prev, name: e.target.value }))}
-      />
+      <S.Filters>
+        <S.FilterInput
+          placeholder="Filtre por um nome"
+          value={criteriaName}
+          onChange={(e) => table.extensions.filter((prev) => ({ ...prev, name: e.target.value }))}
+        />
 
-      <input
-        placeholder="Digite uma idade"
-        type="number"
-        value={table.extensions.criteria.age}
-        onChange={(e) => table.extensions.filter((prev) => ({ ...prev, age: e.target.valueAsNumber }))}
-      />
+        <S.FilterInput
+          placeholder="Filtre por uma idade"
+          type="number"
+          value={criteriaAge}
+          onChange={(e) => table.extensions.filter((prev) => ({ ...prev, age: e.target.valueAsNumber }))}
+        />
+
+        {(criteriaName !== '' || (criteriaAge !== '' && !Number.isNaN(criteriaAge))) && (
+          <S.ResetButton onClick={() => table.extensions.filter((prev) => ({ ...prev, name: '', age: '' }))}>
+            Limpar <MdClose />
+          </S.ResetButton>
+        )}
+      </S.Filters>
 
       <table>
         <thead>
@@ -101,13 +120,23 @@ export const Home = () => {
         </tbody>
       </table>
 
-      <button onClick={table.extensions.prevPage}>Anterior</button>
-      <p>{table.extensions.page}</p>
-      <button onClick={table.extensions.nextPage}>Próximo</button>
+      <S.Controls>
+        <div>
+          <p>
+            {table.extensions.selectedRows.length} de {table.extensions.totalItems} linhas selecionadas.
+          </p>
 
-      <p>Selected: {table.extensions.selectedRows.length}</p>
+          <button onClick={table.extensions.selectAll}>Selecione todas</button>
+        </div>
 
-      <button onClick={table.extensions.selectAll}>Select all</button>
+        <div>
+          <button onClick={table.extensions.firstPage}>Primeira página</button>
+          <button onClick={table.extensions.prevPage}>Anterior</button>
+          <p>{table.extensions.page}</p>
+          <button onClick={table.extensions.nextPage}>Próximo</button>
+          <button onClick={table.extensions.lastPage}>Última página</button>
+        </div>
+      </S.Controls>
     </S.Container>
   )
 }
