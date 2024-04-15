@@ -7,7 +7,7 @@ export const GlobalStyles = css`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: ${({ theme }) => theme.colors.white};
+    background-color: ${({ theme }) => theme.colors.primary};
     overflow: hidden;
     font-family: 'Roboto', sans-serif;
     font-display: swap;
@@ -54,6 +54,11 @@ export const GlobalStyles = css`
     font-display: swap;
     font-size: 16px;
     font-weight: 400;
+    color: ${({ theme }) => theme.colors.text};
+  }
+
+  input::placeholder {
+    color: ${({ theme }) => theme.colors.textLight};
   }
 
   input[type='number']::-webkit-inner-spin-button {

@@ -1,13 +1,11 @@
 const baseTheme = {
   colors: {
-    primary: '#0059ff',
-    secondary: '#0099ff',
-    text: '#010001',
-    textLight: '#8AA1BB',
+    primary: '#09090b',
+    secondary: '#27272a',
+    text: '#ffffff',
+    textLight: '#a1a1aa',
     white: '#ffffff',
     black: '#000000',
-    lightGrey: '#D3D3D3',
-    shadow: '#0000001A',
     error: '#FF0000',
     warning: '#FFFF00',
     success: '#00FF00',
