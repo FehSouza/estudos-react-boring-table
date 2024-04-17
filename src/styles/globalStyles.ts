@@ -14,11 +14,16 @@ export const GlobalStyles = css`
     font-size: 16px;
     font-weight: 400;
     color: ${({ theme }) => theme.colors.text};
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
   }
 
   #root {
     width: 100%;
     height: 100%;
+    display: flex;
     overflow-x: hidden;
     overflow-y: auto;
   }
@@ -39,6 +44,10 @@ export const GlobalStyles = css`
     font-display: swap;
     font-size: 16px;
     font-weight: 400;
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
   }
 
   button,
@@ -55,6 +64,10 @@ export const GlobalStyles = css`
     font-size: 16px;
     font-weight: 400;
     color: ${({ theme }) => theme.colors.text};
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
   }
 
   input::placeholder {
@@ -106,12 +119,12 @@ export const GlobalStyles = css`
 
   ::-webkit-scrollbar-track {
     border-radius: 0;
-    background-color: ${({ theme }) => theme.colors.white};
+    background-color: ${({ theme }) => theme.colors.black};
   }
 
   ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background-color: ${({ theme }) => theme.colors.black};
-    border: 3px solid ${({ theme }) => theme.colors.white};
+    background-color: ${({ theme }) => theme.colors.white};
+    border: 4px solid ${({ theme }) => theme.colors.black};
   }
 `

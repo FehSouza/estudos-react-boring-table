@@ -1,5 +1,7 @@
 import { faker } from '@faker-js/faker'
 import { BoringTable, FilterPlugin, PaginationPlugin, RowSelectPlugin, createOptions } from 'react-boring-table'
+import * as S from './styles'
+import { MdCheck } from 'react-icons/md'
 
 interface Data {
   id: number
@@ -20,26 +22,36 @@ export const tableOptions = createOptions({
     {
       head: (extra) => (
         <th key={extra.id}>
-          <input
-            type="checkbox"
-            checked={extra.getRow()?.isAllSelected}
-            onChange={() => {
+          <S.Checkbox
+            role="checkbox"
+            aria-checked={extra.getRow()?.isAllVisibleSelected}
+            aria-label="Checkbox"
+            onClick={() => {
               const row = extra.getRow()
-              if (row.isAllSelected) return row.resetSelections?.()
-              row.selectAll?.()
+              if (row.isAllVisibleSelected) return row.resetVisibleSelections?.()
+              row.allVisibleSelect?.()
             }}
-          />
+          >
+            {extra.getRow()?.isAllVisibleSelected && <MdCheck size={12} />}
+          </S.Checkbox>
         </th>
       ),
       body: (_item, extra) => (
         <td key={extra.id}>
-          <input type="checkbox" checked={extra.getRow()?.selected} onChange={() => extra.getRow().toggleSelect?.()} />
+          <S.Checkbox
+            role="checkbox"
+            aria-checked={extra.getRow()?.selected}
+            aria-label="Checkbox"
+            onClick={() => extra.getRow().toggleSelect?.()}
+          >
+            {extra.getRow()?.selected && <MdCheck size={12} />}
+          </S.Checkbox>
         </td>
       ),
     },
     {
       head: (extra) => <th key={extra.id}>ID</th>,
-      body: (item, extra) => <td key={extra.id}>{item.id}</td>,
+      body: (item, extra) => <td key={extra.id}>user-{String(item.id).padStart(3, '0')}</td>,
     },
     {
       head: (extra) => <th key={extra.id}>Nome</th>,
@@ -47,7 +59,11 @@ export const tableOptions = createOptions({
     },
     {
       head: (extra) => <th key={extra.id}>Idade</th>,
-      body: (item, extra) => <td key={extra.id}>{item.age}</td>,
+      body: (item, extra) => (
+        <td key={extra.id}>
+          {item.age} {item.age === 1 ? 'ano' : 'anos'}
+        </td>
+      ),
     },
   ],
   plugins: [
@@ -68,7 +84,7 @@ export const tableOptions = createOptions({
     }),
 
     new PaginationPlugin({
-      pageSize: 20,
+      pageSize: 15,
     }),
 
     new RowSelectPlugin(),

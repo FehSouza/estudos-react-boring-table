@@ -12,18 +12,22 @@ export const Home = () => {
     <S.Container>
       <Filters table={table} />
 
-      <table>
-        <thead>
-          {table.head.map((row) => (
-            <tr key={row.id}>{row.cells.map((cell) => cell.value)}</tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.customBody.map((row) => (
-            <tr key={row.id}>{row.cells.map((cell) => cell.value)}</tr>
-          ))}
-        </tbody>
-      </table>
+      <S.TableContainer>
+        <S.Table>
+          <thead>
+            {table.head.map((row) => (
+              <tr key={row.id}>{row.cells.map((cell) => cell.value)}</tr>
+            ))}
+          </thead>
+          <tbody>
+            {table.customBody.map((row) => (
+              <tr key={row.id} aria-checked={row.selected}>
+                {row.cells.map((cell) => cell.value)}
+              </tr>
+            ))}
+          </tbody>
+        </S.Table>
+      </S.TableContainer>
 
       <Controls table={table} />
     </S.Container>

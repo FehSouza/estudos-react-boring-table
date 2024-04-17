@@ -9,8 +9,8 @@ dependencies:
     specifier: ^18.2.0
     version: 18.2.0
   react-boring-table:
-    specifier: ^0.0.23
-    version: 0.0.23(react@18.2.0)
+    specifier: link:../boring-table/packages/react-boring-table
+    version: link:../boring-table/packages/react-boring-table
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
@@ -1011,11 +1011,6 @@ packages:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
     dev: true
 
-  /boring-table@0.0.23:
-    resolution: {integrity: sha512-WUnAWgdq0xkXjXRg5Zc0ov4okWBBHSAChtPKgrH1MKGyL2fn9lu1c8Y6Aka/rwvV7ef+Wr7sYr9xNJpsWwSbrA==}
-    engines: {node: '>=18.0.0'}
-    dev: false
-
   /brace-expansion@1.1.11:
     resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}
     dependencies:
@@ -1749,16 +1744,6 @@ packages:
   /queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: true
-
-  /react-boring-table@0.0.23(react@18.2.0):
-    resolution: {integrity: sha512-qvs3C5jXabU7IxLBjyQ367jmzLGzsoKzKIWCj27cUW7kFGhXPPstDY9Cg6+coQ5C4lHxgnGTYo8p49Varbp65g==}
-    engines: {node: '>=18.0.0'}
-    peerDependencies:
-      react: ^18.0.0
-    dependencies:
-      boring-table: 0.0.23
-      react: 18.2.0
-    dev: false
 
   /react-dom@18.2.0(react@18.2.0):
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}

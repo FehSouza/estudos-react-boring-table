@@ -4,6 +4,12 @@ export const Controls = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: 32px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 16px;
+  }
 `
 
 export const SelectedRowsContainer = styled.div`

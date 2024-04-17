@@ -3,6 +3,10 @@ import styled from 'styled-components'
 export const Filters = styled.div`
   display: flex;
   gap: 8px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `
 
 export const FilterInput = styled.input`
