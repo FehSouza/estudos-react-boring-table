@@ -23,7 +23,7 @@ export const SelectedRowsText = styled.span`
   color: ${({ theme }) => theme.colors.textLight};
 `
 
-export const SelectedRowsButton = styled.button`
+export const SelectButton = styled.button`
   width: fit-content;
   padding: 7px 12px;
   border-radius: 6px;

@@ -27,7 +27,10 @@ export const Table = styled.table`
     flex-direction: column;
   }
 
-  thead tr,
+  tbody tr:first-child {
+    border-top: 1px solid ${({ theme }) => theme.colors.secondary};
+  }
+
   tbody tr:not(:last-child) {
     border-bottom: 1px solid ${({ theme }) => theme.colors.secondary};
   }
@@ -96,4 +99,12 @@ export const Checkbox = styled.div`
   &[aria-checked='true'] {
     background-color: ${({ theme }) => theme.colors.secondary};
   }
+`
+
+export const Warning = styled.p`
+  width: 100%;
+  height: 45px;
+  padding: 12px 0;
+  border-top: 1px solid ${({ theme }) => theme.colors.secondary};
+  text-align: center;
 `

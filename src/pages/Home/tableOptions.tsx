@@ -75,10 +75,7 @@ export const tableOptions = createOptions({
         const validName = item.name.toLowerCase().includes(criteria.name.toLowerCase())
         const validAge = String(item.age).includes(String(criteria.age))
 
-        if (emptyName && emptyAge) return true
-        if (validName && emptyAge) return true
-        if (emptyName && validAge) return true
-        if (validName && validAge) return true
+        if ((emptyName && emptyAge) || (validName && emptyAge) || (emptyName && validAge) || (validName && validAge)) return true
         return false
       },
     }),

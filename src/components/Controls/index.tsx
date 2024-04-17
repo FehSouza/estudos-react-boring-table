@@ -7,28 +7,27 @@ interface ControlsProps {
 }
 
 export const Controls = ({ table }: ControlsProps) => {
+  const totalItems = table.body.length
+  const isAllSelected = table.extensions.isAllSelected
   const page = table.extensions.page
   const totalPages = table.extensions.totalPages
   const disablePrev = page === 1
-  const disableNext = page === totalPages
+  const disableNext = page === totalPages || totalPages === 0
 
   return (
     <S.Controls>
       <S.SelectedRowsContainer>
         <S.SelectedRowsText>
-          {table.extensions.selectedRows.length} de {table.extensions.totalItems} linhas selecionadas.
+          {table.extensions.selectedRows.length} de {totalItems} linhas selecionadas.
         </S.SelectedRowsText>
 
-        {table.extensions.isAllSelected ? (
-          <S.SelectedRowsButton onClick={table.extensions.resetSelections}>Limpe a seleção de todas</S.SelectedRowsButton>
-        ) : (
-          <S.SelectedRowsButton onClick={table.extensions.selectAll}>Selecione todas</S.SelectedRowsButton>
-        )}
+        {isAllSelected && <S.SelectButton onClick={table.extensions.resetSelections}>Limpe a seleção de todas</S.SelectButton>}
+        {!isAllSelected && !!totalItems && <S.SelectButton onClick={table.extensions.selectAll}>Selecione todas</S.SelectButton>}
       </S.SelectedRowsContainer>
 
       <S.Pagination>
         <S.PageInfo>
-          Página {page} de {totalPages}
+          Página {page} de {totalPages !== 0 ? totalPages : 1}
         </S.PageInfo>
 
         <S.PageButtons>

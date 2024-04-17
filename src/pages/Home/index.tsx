@@ -8,6 +8,9 @@ export const Home = () => {
   const [options] = useState(() => tableOptions)
   const table = useTable(options)
 
+  const totalItems = table.body.length
+  const customTotalItems = table.extensions.totalItems
+
   return (
     <S.Container>
       <Filters table={table} />
@@ -27,6 +30,9 @@ export const Home = () => {
             ))}
           </tbody>
         </S.Table>
+
+        {totalItems === 0 && <S.Warning>Sem dados cadastrados</S.Warning>}
+        {totalItems !== 0 && customTotalItems === 0 && <S.Warning>Sem resultados para a busca</S.Warning>}
       </S.TableContainer>
 
       <Controls table={table} />

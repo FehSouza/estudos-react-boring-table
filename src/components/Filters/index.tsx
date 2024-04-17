@@ -14,6 +14,7 @@ interface HandleFilter {
 export const Filters = ({ table }: FiltersProps) => {
   const criteriaName = table.extensions.criteria.name
   const criteriaAge = table.extensions.criteria.age
+  const totalItems = table.body.length
 
   const handleFilter = ({ e, type }: HandleFilter) => table.extensions.filter((prev) => ({ ...prev, [type]: e.target.value }))
   const handleReset = () => table.extensions.filter((prev) => ({ ...prev, name: '', age: '' }))
@@ -29,7 +30,7 @@ export const Filters = ({ table }: FiltersProps) => {
         onChange={(e) => handleFilter({ e, type: 'age' })}
       />
 
-      {(criteriaName !== '' || (criteriaAge !== '' && !Number.isNaN(criteriaAge))) && (
+      {(criteriaName !== '' || (criteriaAge !== '' && !Number.isNaN(criteriaAge))) && !!totalItems && (
         <S.ResetButton onClick={handleReset}>
           Limpar <MdClose />
         </S.ResetButton>
