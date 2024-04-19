@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker'
 import { BoringTable, FilterPlugin, PaginationPlugin, RowSelectPlugin, createOptions } from 'react-boring-table'
-import * as S from './styles'
 import { MdCheck } from 'react-icons/md'
+import * as S from './styles'
 
 interface Data {
   id: number
@@ -81,7 +81,7 @@ export const tableOptions = createOptions({
     }),
 
     new PaginationPlugin({
-      pageSize: 15,
+      pageSize: 10,
     }),
 
     new RowSelectPlugin(),
