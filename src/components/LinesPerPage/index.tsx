@@ -29,8 +29,6 @@ export const LinesPerPage = ({ table }: LinesPerPageProps) => {
     updateSetPage(e)
   }
 
-  // TODO: se só tiver 20 itens na tabela, travar a exibição de 30+?
-
   return (
     <S.Container>
       <span>Linhas por página</span>

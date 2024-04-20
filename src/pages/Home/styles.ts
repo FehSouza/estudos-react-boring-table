@@ -56,7 +56,8 @@ export const Table = styled.table`
 
     @media (max-width: 768px) {
       width: calc((100% - 164px) / 2);
-      padding: 12px 10px;
+      padding: 10px;
+      align-items: center;
     }
 
     &:first-child {

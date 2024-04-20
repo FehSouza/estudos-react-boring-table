@@ -29,24 +29,26 @@ export const Controls = ({ table }: ControlsProps) => {
       <S.Pagination>
         <LinesPerPage table={table} />
 
-        <S.PageInfo>
-          Página {page} de {totalPages !== 0 ? totalPages : 1}
-        </S.PageInfo>
+        <S.PageContent>
+          <S.PageInfo>
+            Página {page} de {totalPages !== 0 ? totalPages : 1}
+          </S.PageInfo>
 
-        <S.PageButtons>
-          <S.PageButton onClick={table.extensions.firstPage} disabled={disablePrev}>
-            <MdKeyboardDoubleArrowLeft />
-          </S.PageButton>
-          <S.PageButton onClick={table.extensions.prevPage} disabled={disablePrev}>
-            <MdKeyboardArrowLeft />
-          </S.PageButton>
-          <S.PageButton onClick={table.extensions.nextPage} disabled={disableNext}>
-            <MdKeyboardArrowRight />
-          </S.PageButton>
-          <S.PageButton onClick={table.extensions.lastPage} disabled={disableNext}>
-            <MdKeyboardDoubleArrowRight />
-          </S.PageButton>
-        </S.PageButtons>
+          <S.PageButtons>
+            <S.PageButton onClick={table.extensions.firstPage} disabled={disablePrev}>
+              <MdKeyboardDoubleArrowLeft />
+            </S.PageButton>
+            <S.PageButton onClick={table.extensions.prevPage} disabled={disablePrev}>
+              <MdKeyboardArrowLeft />
+            </S.PageButton>
+            <S.PageButton onClick={table.extensions.nextPage} disabled={disableNext}>
+              <MdKeyboardArrowRight />
+            </S.PageButton>
+            <S.PageButton onClick={table.extensions.lastPage} disabled={disableNext}>
+              <MdKeyboardDoubleArrowRight />
+            </S.PageButton>
+          </S.PageButtons>
+        </S.PageContent>
       </S.Pagination>
     </S.Controls>
   )

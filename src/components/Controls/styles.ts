@@ -8,7 +8,7 @@ export const Controls = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    gap: 16px;
+    gap: 32px;
   }
 `
 
@@ -38,6 +38,26 @@ export const Pagination = styled.div`
   display: flex;
   align-items: center;
   gap: 32px;
+
+  @media (max-width: 1024px) {
+    flex-direction: column-reverse;
+    gap: 16px;
+    align-items: flex-end;
+  }
+
+  @media (max-width: 768px) {
+    align-items: center;
+  }
+`
+
+export const PageContent = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 32px;
+
+  @media (max-width: 768px) {
+    gap: 16px;
+  }
 `
 
 export const PageInfo = styled.span`
