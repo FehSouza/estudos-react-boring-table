@@ -11,15 +11,31 @@ const OPTIONS = ['10', '20', '30', '40', '50']
 
 export const LinesPerPage = ({ table }: LinesPerPageProps) => {
   const pageSize = String(table.extensions.pageSize)
-  const setPageSize = (e: string) => table.extensions.setPageSize(Number(e))
 
-  // TODO: arrumar a paginação ao escolher outro page size
+  const updateSetPage = async (size: string) => {
+    const page = table.extensions.page
+    const pageSize = table.extensions.pageSize
+    const pageSizeUpdated = Number(size)
+    const totalItems = table.extensions.totalItems
+
+    const totalLines = Math.min(pageSize * (page - 1) + 1, totalItems)
+    const pageUpdated = totalLines / pageSizeUpdated
+    const pageRounded = Math.ceil(pageUpdated)
+    table.extensions.setPage(pageRounded, true)
+  }
+
+  const setPageSize = (e: string) => {
+    table.extensions.setPageSize(Number(e))
+    updateSetPage(e)
+  }
+
+  // TODO: se só tiver 20 itens na tabela, travar a exibição de 30+?
 
   return (
     <S.Container>
       <span>Linhas por página</span>
 
-      <Select.Root value={pageSize} onValueChange={(e) => setPageSize(e)}>
+      <Select.Root value={pageSize} onValueChange={setPageSize}>
         <S.SelectButton aria-label="Seletor de quantidade de linhas por página">
           <Select.Value aria-label={`Quantidade selecionada: ${pageSize}`}>{pageSize}</Select.Value>
 

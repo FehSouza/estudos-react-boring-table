@@ -8,9 +8,6 @@ dependencies:
   '@radix-ui/react-select':
     specifier: ^2.0.0
     version: 2.0.0(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@18.2.0)(react@18.2.0)
-  '@raulpesilva/re-state':
-    specifier: ^1.2.32
-    version: 1.2.32(react-dom@18.2.0)(react@18.2.0)
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -1094,24 +1091,6 @@ packages:
     resolution: {integrity: sha512-fyrgCaedtvMg9NK3en0pnOYJdtfwxUcNolezkNPUsoX57X8oQk+NkqcvzHXD2uKNij6GXmWU9NDru2IWjrO4BQ==}
     dependencies:
       '@babel/runtime': 7.24.4
-    dev: false
-
-  /@raulpesilva/re-state@1.2.32(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-Hqko4WmjMWQWH6HX7DaS6aQv7FsVePPIQLfH2BKY0O825U2NV4Hey4I8CsZiIB1OZ9TESMNklx+zT8q15D0Lpg==}
-    engines: {node: '>=14'}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: '*'
-      react-native: '*'
-    peerDependenciesMeta:
-      react-dom:
-        optional: true
-      react-native:
-        optional: true
-    dependencies:
-      '@babel/runtime': 7.24.4
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /@rollup/rollup-android-arm-eabi@4.14.1:
